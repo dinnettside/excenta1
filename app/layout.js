@@ -1,44 +1,32 @@
-import Navbar from "./components/Navbar";
+// app/layout.js
 import "./globals.css";
+import { Inter } from "next/font/google";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata = {
-  title: "Excenta - Skreddersydde møbelløsninger",
-  description: "Tidløs design og presisjonshåndverk. Vi skaper skreddersydde kjøkken, garderober, bad og møbler.",
-  icons: {
-    icon: "/favicon.webp",
+  title: "Excenta",
+  description: "Skreddersydde løsninger i tre – design, produksjon og montering.",
+  metadataBase: new URL("https://excenta.no"),
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Excenta",
+    description: "Skreddersydde løsninger i tre – design, produksjon og montering.",
+    url: "https://excenta.no",
+    siteName: "Excenta",
+    type: "website",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="no">
-      <head>
-        <title>Excenta</title>
-        <style>
-          {`
-            @font-face {
-              font-family: 'Geist';
-              src: url('/path-to-geist-font.woff2') format('woff2');
-            }
-
-            @font-face {
-              font-family: 'Geist Mono';
-              src: url('/path-to-geist-mono-font.woff2') format('woff2');
-            }
-
-            body {
-              font-family: 'Geist', sans-serif;
-            }
-
-            code, pre {
-              font-family: 'Geist Mono', monospace;
-            }
-          `}
-        </style>
-      </head>
-      <body>
+    <html lang="no" className="scroll-smooth">
+      <body className={`${inter.className} bg-background text-foreground antialiased`}>
         <Navbar />
-        {children}
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );

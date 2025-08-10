@@ -1,53 +1,30 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Enkle tema-variabler som ikke kolliderer med dine komponenter */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;
+  --foreground: 222 20% 12%;
+  --muted: 220 14% 96%;
+  --border: 220 14% 90%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html, body { @apply h-full; }
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
   }
+  a { @apply underline-offset-4 decoration-transparent hover:decoration-black transition; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Geist', sans-serif;
+@layer components {
+  .container { @apply max-w-7xl; }
 }
 
-code, pre {
-  font-family: 'Geist Mono', monospace;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.animate-scroll {
-  animation: scroll 30s linear infinite;
-}
-
-@font-face {
-  font-family: 'Geist';
-  src: url('/path-to-geist-font.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Geist Mono';
-  src: url('/path-to-geist-mono-font.woff2') format('woff2');
+@layer utilities {
+  .bg-background { background-color: hsl(var(--background)); }
+  .text-foreground { color: hsl(var(--foreground)); }
+  .bg-muted { background-color: hsl(var(--muted)); }
+  .border-border { border-color: hsl(var(--border)); }
 }
